@@ -17,13 +17,28 @@ export const AppNavigation = observer(() => {
       <NavigationContainer ref={navigationRef}>
         <Stack.Navigator
           screenOptions={{
-            headerShown: false,
-            headerTransparent: false,
             animation: 'fade',
           }}
         >
-          <Stack.Screen name="UserList" component={UserListScreen} />
-          <Stack.Screen name="User" component={UserScreen} />
+          <Stack.Screen
+            name="UserList"
+            component={UserListScreen}
+            options={{
+              title: 'Users',
+              headerTitleAlign: 'center',
+            }}
+          />
+          <Stack.Screen
+            name="User"
+            component={UserScreen}
+            options={{
+              title: 'User full info',
+              headerTitleAlign: 'center',
+              headerShadowVisible: false,
+              headerBackVisible: true,
+              headerShown: true,
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

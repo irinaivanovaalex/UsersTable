@@ -1,15 +1,13 @@
 import { useNavigation } from '@react-navigation/native'
 import { observer } from 'mobx-react-lite'
 import React, { useEffect } from 'react'
-import { View, Text, StyleSheet, Image, FlatList, Pressable } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { View, Text, StyleSheet, Image, FlatList, Pressable, ActivityIndicator } from 'react-native'
 
 import { useStores } from '../root/hook/useStores'
 
 export const UserListScreen = observer(() => {
   const { usersStore } = useStores()
   const navigation = useNavigation()
-  const safearea = useSafeAreaInsets()
 
   useEffect(() => {
     //Todo: В catch должно быть отображение ошибок в натификациях
@@ -18,11 +16,16 @@ export const UserListScreen = observer(() => {
 
   return (
     <View style={styles.container}>
+      {!usersStore.users && (
+        <View style={styles.indicator}>
+          <ActivityIndicator />
+        </View>
+      )}
       <FlatList
+        contentContainerStyle={styles.flatlistContainer}
         refreshing={usersStore.usersRequest.isLoading}
         onRefresh={() => void usersStore.usersRequest.fetch()}
         data={usersStore.users}
-        contentContainerStyle={{ paddingVertical: safearea.top }}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
         renderItem={({ item }) => {
           return (
@@ -53,9 +56,11 @@ export const UserListScreen = observer(() => {
 const styles = StyleSheet.create({
   rowView: {
     paddingHorizontal: 16,
-    paddingVertical: 16,
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  flatlistContainer: {
+    paddingTop: 16,
   },
   text: {
     fontStyle: 'normal',
@@ -65,7 +70,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   separator: {
-    padding: 6,
+    margin: 8,
   },
   imageStyle: {
     borderRadius: 18,
@@ -73,5 +78,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'gray',
     width: 36,
     height: 36,
+  },
+  indicator: {
+    flex: 1,
+    justifyContent: 'center',
   },
 })

@@ -1,20 +1,17 @@
 import { observer } from 'mobx-react-lite'
 import React, { useMemo } from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { useStores } from '../root/hook/useStores'
 
 export const UserScreen = observer(() => {
   const { usersStore } = useStores()
-
-  const safearea = useSafeAreaInsets()
   const user = useMemo(() => usersStore.selectedUser, [usersStore.selectedUser])
 
   return (
     <View>
       {!!user && (
-        <View style={[styles.root, { paddingTop: safearea.top }]}>
+        <View style={styles.root}>
           {!!user.avatar && (
             <Image resizeMode="contain" style={styles.imageStyle} source={{ uri: user.avatar }} />
           )}
@@ -40,5 +37,6 @@ const styles = StyleSheet.create({
   },
   root: {
     paddingHorizontal: 16,
+    paddingVertical: 24,
   },
 })
