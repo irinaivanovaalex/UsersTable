@@ -1,0 +1,53 @@
+env:
+  es6: true
+
+extends:
+  - prettier
+  - plugin:import/typescript
+  - plugin:react/recommended
+  - plugin:react-hooks/recommended
+  - plugin:@typescript-eslint/recommended
+  - plugin:prettier/recommended
+
+globals:
+  Atomics: readonly
+  SharedArrayBuffer: readonly
+  __DEV__: true
+
+parser: '@typescript-eslint/parser'
+
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: 2018
+  sourceType: module
+  project: './tsconfig.base.json'
+
+plugins:
+  - react
+  - import
+  - '@typescript-eslint'
+  - i18n
+  - 'unused-imports'
+  - jest
+
+settings:
+  react:
+    version: 'detect'
+
+ignorePatterns:
+  - dist
+  - app
+  - node_modules
+
+rules:
+  # custom rules
+  'no-restricted-syntax': [
+    'warn',
+    {
+      "selector": "CallExpression[callee.name='testDebug']",
+      "message": "Use `testDebug` only for dev-testing purposes"
+    }
+  ]
+
+  'react/react-in-jsx-scope': 'off'
