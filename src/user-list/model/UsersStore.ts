@@ -1,24 +1,24 @@
-import {makeAutoObservable} from 'mobx';
-import {RequestStore} from 'mobx-request';
+import { makeAutoObservable } from 'mobx'
+import { RequestStore } from 'mobx-request'
 
-import {UserEntity} from './UserEntity';
-import {UserService} from './UserService';
+import { UserEntity } from './UserEntity'
+import { UserService } from './UserService'
 
 export class UsersStore {
   usersRequest = new RequestStore(async () => {
-    return this.service.fetchUsers();
-  });
+    return this.service.fetchUsers()
+  })
+  selectedUser: UserEntity | undefined = undefined
 
   get users() {
-    return this.usersRequest.value;
+    return this.usersRequest.value
   }
 
   selectUser = (user: UserEntity) => {
-    this.selectedUser = user;
-  };
-  selectedUser: UserEntity | undefined = undefined;
+    this.selectedUser = user
+  }
 
   constructor(private service: UserService) {
-    makeAutoObservable(this);
+    makeAutoObservable(this)
   }
 }

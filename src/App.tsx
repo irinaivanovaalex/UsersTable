@@ -5,19 +5,19 @@
  * @format
  */
 
-import {observer} from 'mobx-react-lite';
-import React from 'react';
-import {StatusBar, useColorScheme} from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import { observer } from 'mobx-react-lite'
+import React from 'react'
+import { StatusBar, useColorScheme } from 'react-native'
+import { Colors } from 'react-native/Libraries/NewAppScreen'
 
-import {AppNavigation} from './navigation/AppNavigation';
+import { AppNavigation } from './navigation/AppNavigation'
 
 export const App = observer(() => {
-  const isDarkMode = useColorScheme() === 'dark';
+  const isDarkMode = useColorScheme() === 'dark'
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  }
 
   return (
     <>
@@ -27,7 +27,7 @@ export const App = observer(() => {
       />
       <AppNavigation />
     </>
-  );
-});
+  )
+})
 
-export default App;
+export default App

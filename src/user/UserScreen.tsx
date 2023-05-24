@@ -1,27 +1,22 @@
-import {observer} from 'mobx-react-lite';
-import React, {useMemo} from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import { observer } from 'mobx-react-lite'
+import React, { useMemo } from 'react'
+import { Image, StyleSheet, Text, View } from 'react-native'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import {useStores} from '../root/hook/useStores';
+import { useStores } from '../root/hook/useStores'
 
 export const UserScreen = observer(() => {
-  const {usersStore} = useStores();
-  const safearea = useSafeAreaInsets();
-  const user = useMemo(
-    () => usersStore.selectedUser,
-    [usersStore.selectedUser],
-  );
+  const { usersStore } = useStores()
+
+  const safearea = useSafeAreaInsets()
+  const user = useMemo(() => usersStore.selectedUser, [usersStore.selectedUser])
+
   return (
     <View>
       {!!user && (
-        <View style={[styles.root, {paddingTop: safearea.top}]}>
+        <View style={[styles.root, { paddingTop: safearea.top }]}>
           {!!user.avatar && (
-            <Image
-              resizeMode="contain"
-              style={styles.imageStyle}
-              source={{uri: user.avatar}}
-            />
+            <Image resizeMode="contain" style={styles.imageStyle} source={{ uri: user.avatar }} />
           )}
           <View style={styles.separator} />
           <Text>{user.first_name}</Text>
@@ -30,8 +25,8 @@ export const UserScreen = observer(() => {
         </View>
       )}
     </View>
-  );
-});
+  )
+})
 const styles = StyleSheet.create({
   imageStyle: {
     borderRadius: 18,
@@ -46,4 +41,4 @@ const styles = StyleSheet.create({
   root: {
     paddingHorizontal: 16,
   },
-});
+})
