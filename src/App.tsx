@@ -5,18 +5,12 @@
  * @format
  */
 
+import {observer} from 'mobx-react-lite';
 import React from 'react';
-import {
-  StatusBar,
-  useColorScheme,
-} from 'react-native';
+import {StatusBar, useColorScheme} from 'react-native';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 
-import {
-  Colors,
-} from 'react-native/Libraries/NewAppScreen';
-import { AppNavigation } from './navigation/AppNavigation';
-import { observer } from 'mobx-react-lite';
-
+import {AppNavigation} from './navigation/AppNavigation';
 
 export const App = observer(() => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -26,14 +20,14 @@ export const App = observer(() => {
   };
 
   return (
-  <>
+    <>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
       <AppNavigation />
-      </>
+    </>
   );
-})
+});
 
 export default App;

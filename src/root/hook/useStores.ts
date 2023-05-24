@@ -1,7 +1,7 @@
-import { RootStore } from "../RootStore"
+import {RootStore} from '../RootStore';
 
-const rootStore = new RootStore()
+const rootStore = new RootStore();
 
 export function useStores() {
-  return rootStore
+  return rootStore;
 }
