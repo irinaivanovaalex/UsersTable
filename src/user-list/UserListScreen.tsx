@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import {View, Text, StyleSheet, Image, FlatList } from "react-native";
+import {View, Text, StyleSheet, Image, FlatList, ActivityIndicator } from "react-native";
 import React, { useEffect } from "react";
 import { useStores } from "../root/hook/useStores";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -16,6 +16,8 @@ export const UserListScreen = observer(() => {
 console.log(usersStore.users)
     return <View style={styles.container}>
     <FlatList 
+    refreshing={usersStore.usersRequest.isLoading}
+    onRefresh={() => void usersStore.usersRequest.fetch()}
     data={usersStore.users}
     contentContainerStyle={{paddingVertical: safearea.top}}
     ItemSeparatorComponent={() => <View style={styles.separator} />}
