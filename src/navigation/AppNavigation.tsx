@@ -4,13 +4,12 @@ import { observer } from 'mobx-react-lite'
 import { useRef } from 'react'
 import { UserListScreen } from '../user-list/UserListScreen'
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context'
+import { UserScreen } from '../user/UserScreen'
 
 const Stack = createNativeStackNavigator()
 
 export const AppNavigation = observer(() => {
     const navigationRef = useRef<NavigationContainerRef<ReactNavigation.RootParamList>>(null)
-    const safeArea = useSafeAreaInsets()
-
 
     return <SafeAreaProvider>
     <NavigationContainer ref={navigationRef}>
@@ -19,14 +18,15 @@ export const AppNavigation = observer(() => {
             headerShown: false,
             headerTransparent: false,
             animation: 'fade',
-            contentStyle: {
-              paddingTop: safeArea.top,
-            },
           }}
         >
             <Stack.Screen 
             name='UserList'
             component={UserListScreen}
+            />
+            <Stack.Screen 
+            name='User'
+            component={UserScreen}
             />
         </Stack.Navigator>
     </NavigationContainer>
