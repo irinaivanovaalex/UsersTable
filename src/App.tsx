@@ -15,9 +15,10 @@ import {
   Colors,
 } from 'react-native/Libraries/NewAppScreen';
 import { AppNavigation } from './navigation/AppNavigation';
+import { observer } from 'mobx-react-lite';
 
 
-function App(): JSX.Element {
+export const App = observer(() => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
@@ -33,6 +34,6 @@ function App(): JSX.Element {
       <AppNavigation />
       </>
   );
-}
+})
 
 export default App;

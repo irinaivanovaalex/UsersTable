@@ -1,27 +1,28 @@
 import { observer } from "mobx-react-lite";
-import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
-import { FlatList, View, Text, StyleSheet, Image } from "react-native";
+import {View, Text, StyleSheet, Image, FlatList } from "react-native";
 import React, { useEffect } from "react";
 import { useStores } from "../root/hook/useStores";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 
 export const UserListScreen = observer(() => {
     const  { usersStore } = useStores()
     const safearea = useSafeAreaInsets()
+
     useEffect(() => {
         //Todo: В catch должно быть отображение ошибок в натификациях
         void usersStore.usersRequest.fetch().catch((e) => console.log(e))
     }, [])
-
-    console.log(usersStore.users)
-return <View style={{flex:1}}>
-    <View style={{flex:1, backgroundColor: 'red'}}/>
+console.log(usersStore.users)
+    return <View style={styles.container}>
     <FlatList 
     data={usersStore.users}
+    contentContainerStyle={{paddingVertical: safearea.top}}
+    ItemSeparatorComponent={() => <View style={styles.separator} />}
     renderItem={({item}) => {
-        console.log(item.first_name)
+        console.log(item)
         return <View key={item.uid} style={styles.rowView}>
-            {!!item.avatar && <Image source={{uri: item.avatar}} />}
+            {!!item.avatar && <Image resizeMode="contain" style={styles.imageStyle} source={{uri: item.avatar}} />}
             <Text style={styles.text}>{item.first_name}</Text>
         </View>
     }}
@@ -34,10 +35,25 @@ const styles = StyleSheet.create({
    rowView: {
     paddingHorizontal: 16,
     paddingVertical: 16,
+    flexDirection: 'row',
+    alignItems: 'center'
    },
    text: {
     fontStyle: 'normal',
     color: '#000'
    },
+   container: {
+    flex:1
+   },
+   separator: {
+    padding: 6,
+  },
+  imageStyle: {
+    borderRadius: 18,
+    marginEnd: 16,
+     backgroundColor: 'gray',
+     width: 36,
+     height: 36,
+  },
   });
   
