@@ -14,19 +14,19 @@ export const UserListScreen = observer(() => {
     }, [])
 
     console.log(usersStore.users)
-return <SafeAreaView>
+return <View style={{flex:1}}>
+    <View style={{flex:1, backgroundColor: 'red'}}/>
     <FlatList 
-    contentContainerStyle={{paddingTop: safearea.top}}
     data={usersStore.users}
     renderItem={({item}) => {
         console.log(item.first_name)
-        return <View style={styles.rowView}>
+        return <View key={item.uid} style={styles.rowView}>
             {!!item.avatar && <Image source={{uri: item.avatar}} />}
             <Text style={styles.text}>{item.first_name}</Text>
         </View>
     }}
     />
-    </SafeAreaView>
+    </View>
 })
 
 
