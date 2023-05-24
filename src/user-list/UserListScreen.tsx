@@ -10,7 +10,7 @@ export const UserListScreen = observer(() => {
   const navigation = useNavigation()
 
   useEffect(() => {
-    //Todo: В catch должно быть отображение ошибок в натификациях
+    //Todo: В catch должно быть отображение ошибок в нотификациях
     void usersStore.usersRequest.fetch().catch(e => console.log(e))
   }, [])
 
