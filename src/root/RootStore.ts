@@ -1,6 +1,8 @@
 import { makeAutoObservable } from 'mobx'
-import { UsersStore } from '../user-list/model/UsersStore'
+
 import { UserService } from '../user-list/model/UserService'
+import { UsersStore } from '../user-list/model/UsersStore'
+
 import { createHttpClient } from './createHttpClient'
 
 export class RootStore {
@@ -9,7 +11,7 @@ export class RootStore {
   }
 
   private usersService = new UserService(this.httpClient)
-  
+
   usersStore = new UsersStore(this.usersService)
 
   constructor() {
