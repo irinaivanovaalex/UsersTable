@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import {View, Text, StyleSheet, Image, FlatList, ActivityIndicator } from "react-native";
+import {View, Text, StyleSheet, Image, FlatList, ActivityIndicator, Pressable } from "react-native";
 import React, { useEffect } from "react";
 import { useStores } from "../root/hook/useStores";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -26,14 +26,14 @@ console.log(usersStore.users)
     ItemSeparatorComponent={() => <View style={styles.separator} />}
     renderItem={({item}) => {
         console.log(item)
-        return <View key={item.uid} onTouchStart={
-            () => {
-                usersStore.selectUser(item)
-                navigation.navigate('User')
-                }} style={styles.rowView}>
+        return <Pressable onPress={() => {
+            usersStore.selectUser(item)
+            navigation.navigate('User')
+            } }><View key={item.uid}
+            style={styles.rowView}>
             {!!item.avatar && <Image resizeMode="contain" style={styles.imageStyle} source={{uri: item.avatar}} />}
             <Text style={styles.text}>{item.first_name}</Text>
-        </View>
+        </View></Pressable>
     }}
     />
     </View>
