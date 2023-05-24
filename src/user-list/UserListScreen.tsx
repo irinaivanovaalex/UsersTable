@@ -26,7 +26,11 @@ console.log(usersStore.users)
     ItemSeparatorComponent={() => <View style={styles.separator} />}
     renderItem={({item}) => {
         console.log(item)
-        return <View key={item.uid} onTouchStart={() => navigation.navigate('User')} style={styles.rowView}>
+        return <View key={item.uid} onTouchStart={
+            () => {
+                usersStore.selectUser(item)
+                navigation.navigate('User')
+                }} style={styles.rowView}>
             {!!item.avatar && <Image resizeMode="contain" style={styles.imageStyle} source={{uri: item.avatar}} />}
             <Text style={styles.text}>{item.first_name}</Text>
         </View>
