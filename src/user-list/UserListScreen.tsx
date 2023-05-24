@@ -3,10 +3,13 @@ import {View, Text, StyleSheet, Image, FlatList, ActivityIndicator } from "react
 import React, { useEffect } from "react";
 import { useStores } from "../root/hook/useStores";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
+import { UserScreen } from "../user/UserScreen";
 
 
 export const UserListScreen = observer(() => {
     const  { usersStore } = useStores()
+    const navigation = useNavigation()
     const safearea = useSafeAreaInsets()
 
     useEffect(() => {
@@ -23,7 +26,7 @@ console.log(usersStore.users)
     ItemSeparatorComponent={() => <View style={styles.separator} />}
     renderItem={({item}) => {
         console.log(item)
-        return <View key={item.uid} style={styles.rowView}>
+        return <View key={item.uid} onTouchStart={() => navigation.navigate('User')} style={styles.rowView}>
             {!!item.avatar && <Image resizeMode="contain" style={styles.imageStyle} source={{uri: item.avatar}} />}
             <Text style={styles.text}>{item.first_name}</Text>
         </View>
