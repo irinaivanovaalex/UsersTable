@@ -1,4 +1,3 @@
-
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios'
 
 export interface CreateHttpClientProps {
@@ -19,12 +18,7 @@ export interface CreateHttpClientProps {
   onRequestError?: (error: AxiosError) => Promise<unknown>
 }
 
-export function createHttpClient(
-  url: string,
-  props: CreateHttpClientProps = {
-  },
-): AxiosInstance {
-
+export function createHttpClient(url: string, props: CreateHttpClientProps = {}): AxiosInstance {
   const client = axios.create({
     baseURL: url,
     timeout: 1 * 60 * 1000, // 1 min,
