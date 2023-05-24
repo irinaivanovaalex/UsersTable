@@ -1,10 +1,9 @@
 import { observer } from "mobx-react-lite";
-import {View, Text, StyleSheet, Image, FlatList, ActivityIndicator, Pressable } from "react-native";
+import {View, Text, StyleSheet, Image, FlatList, Pressable } from "react-native";
 import React, { useEffect } from "react";
 import { useStores } from "../root/hook/useStores";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
-import { UserScreen } from "../user/UserScreen";
 
 
 export const UserListScreen = observer(() => {
@@ -16,8 +15,8 @@ export const UserListScreen = observer(() => {
         //Todo: В catch должно быть отображение ошибок в натификациях
         void usersStore.usersRequest.fetch().catch((e) => console.log(e))
     }, [])
-console.log(usersStore.users)
-    return <View style={styles.container}>
+
+return <View style={styles.container}>
     <FlatList 
     refreshing={usersStore.usersRequest.isLoading}
     onRefresh={() => void usersStore.usersRequest.fetch()}
@@ -25,7 +24,6 @@ console.log(usersStore.users)
     contentContainerStyle={{paddingVertical: safearea.top}}
     ItemSeparatorComponent={() => <View style={styles.separator} />}
     renderItem={({item}) => {
-        console.log(item)
         return <Pressable onPress={() => {
             usersStore.selectUser(item)
             navigation.navigate('User')
